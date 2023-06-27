@@ -1,24 +1,27 @@
 # frozen_string_literal: true
 
 require_relative "desafio_de_rails_avancado/version"
+require 'jwt'
 
 module DesafioDeRailsAvancado
-  class Error < StandardError; end
+  class Erro < StandardError; end
 
   class Criptografia
 
-    def initialize
-      @hmac_secret = 'DesafioMaisQue21DiasDeRailsAvancado'
+    def initialize(secret)
+      raise DesafioDeRailsAvancado::Erro.new("Você precisa passar qual é o segredo") if secret.nil? || secret.empty?
+      @hmac_secret = secret
     end
 
-    def criptografar(payload)
-      raise Error("O payload não pode ser vazio") if payload.empty? || payload.nil?
-      return JWT.encode payload, @hmac_secret, 'HS256'
+    def criptografar(item)
+      raise DesafioDeRailsAvancado::Erro.new("O item não pode ser vazio") if item.nil? || item.empty?
+      return JWT.encode item, @hmac_secret, 'HS256'
     end
 
     def descriptografar(token)
-      raise Error("O token não pode ser vazio") if payload.empty? || payload.nil?
-      return JWT.decode token, @hmac_secret, true, { algorithm: 'HS256' }
+      raise DesafioDeRailsAvancado::Erro.new("O token não pode ser vazio") if token.nil? || token.empty?
+      item, algorithm = JWT.decode token, @hmac_secret, true, { algorithm: 'HS256' }
+      return item
     end
 
   end
