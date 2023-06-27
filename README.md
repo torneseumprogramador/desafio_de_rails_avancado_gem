@@ -18,6 +18,11 @@ Para rodar o lint de validação de código siga os passoa abaixo:
 bundle exec rubocop
 ```
 
+Para fazer o build da gem:
+```shell
+bundle exec gem build desafio_de_rails_avancado.gemspec 
+```
+
 
 # Como utilizar
 ```ruby
