@@ -2,4 +2,4 @@
 
 ## [0.1.0] - 2023-06-27
 
-- Initial release
+- Criando classe Criptografia onde posso fazer a criptografia e a decriptografia dos dados

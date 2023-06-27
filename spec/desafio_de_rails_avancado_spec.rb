@@ -8,7 +8,7 @@ RSpec.describe DesafioDeRailsAvancado do
   it "Utilizando minha criptografia" do
     # Arrange (Organizar nossas variáveis)
     meu_nome = "Walter Paulo"
-    cripto = DesafioDeRailsAvancado::Criptografia.new('DesafioMaisQue21DiasDeRailsAvancado')
+    cripto = DesafioDeRailsAvancado::Criptografia.new("DesafioMaisQue21DiasDeRailsAvancado")
 
     # Act (Executar ação para o teste)
     token = cripto.criptografar(meu_nome)
@@ -19,16 +19,18 @@ RSpec.describe DesafioDeRailsAvancado do
 
   it "Utilizando minha criptografia com valor nil" do
     # Arrange (Organizar nossas variáveis)
-    cripto = DesafioDeRailsAvancado::Criptografia.new('DesafioMaisQue21DiasDeRailsAvancado')
+    cripto = DesafioDeRailsAvancado::Criptografia.new("DesafioMaisQue21DiasDeRailsAvancado")
 
     # Act & Assert
-    expect { cripto.criptografar(nil) }.to raise_error(DesafioDeRailsAvancado::Erro, "O item não pode ser vazio")
+    expect do
+      cripto.criptografar(nil)
+    end.to raise_error(DesafioDeRailsAvancado::Erro, "O item não pode ser vazio")
   end
 
   it "Utilizando minha decriptografia" do
     # Arrange (Organizar nossas variáveis)
     meu_nome = "Walter Paulo"
-    cripto = DesafioDeRailsAvancado::Criptografia.new('DesafioMaisQue21DiasDeRailsAvancado')
+    cripto = DesafioDeRailsAvancado::Criptografia.new("DesafioMaisQue21DiasDeRailsAvancado")
     token = cripto.criptografar(meu_nome)
 
     # Act (Executar ação para o teste)
@@ -39,8 +41,8 @@ RSpec.describe DesafioDeRailsAvancado do
   end
 
   it "Criando instancia, passando token no construtor" do
-    # Arrange & Act 
-    cripto = DesafioDeRailsAvancado::Criptografia.new('DesafioMaisQue21DiasDeRailsAvancado')
+    # Arrange & Act
+    cripto = DesafioDeRailsAvancado::Criptografia.new("DesafioMaisQue21DiasDeRailsAvancado")
 
     # Assert (Validar o resultado da ação)
     expect(cripto).not_to be_nil
@@ -53,12 +55,15 @@ RSpec.describe DesafioDeRailsAvancado do
 
   it "Criando instancia, passando empty no construtor" do
     # Arrange & Act & Assert
-    expect { DesafioDeRailsAvancado::Criptografia.new("") }.to raise_error(DesafioDeRailsAvancado::Erro, "Você precisa passar qual é o segredo")
+    expect do
+      DesafioDeRailsAvancado::Criptografia.new("")
+    end.to raise_error(DesafioDeRailsAvancado::Erro, "Você precisa passar qual é o segredo")
   end
 
   it "Criando instancia, passando nil no construtor" do
     # Arrange & Act & Assert
-    expect { DesafioDeRailsAvancado::Criptografia.new(nil) }.to raise_error(DesafioDeRailsAvancado::Erro, "Você precisa passar qual é o segredo")
-  end
-  
+    expect do
+      DesafioDeRailsAvancado::Criptografia.new(nil)
+    end.to raise_error(DesafioDeRailsAvancado::Erro, "Você precisa passar qual é o segredo")
+  end  
 end
